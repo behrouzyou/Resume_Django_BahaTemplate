@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
-from django.contrib import staticfiles
+
+import os.path
 
 from django.conf.global_settings import STATICFILES_DIRS
 
@@ -134,4 +135,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-
+# STATIC_ROOT=os.path.join(BASE_DIR, 'static')
+MEDIA_URL='/media/'
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')

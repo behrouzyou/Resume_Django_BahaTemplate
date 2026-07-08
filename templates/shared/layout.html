@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+	<!-- Meta -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<!-- Title -->
+	<title>قالب Baha - قالب شخصی باها</title>
+
+	{% include 'shared/_head_references.html' %}
+	<meta name="theme-color" content="#0e0f10">
+
+</head>
+
+<body>
+
+	<!--Theme Options Start-->
+	{% include 'partials/_theme_option.html' %}
+
+	<!-- Preloader -->
+	<div id="preloader">
+		<div class="loading-area">
+			<div class="circle"></div>
+		</div>
+		<div class="left-side"></div>
+		<div class="right-side"></div>
+	</div>
+
+	<!-- Main Site -->
+	<div id="home">
+		<div id="about">
+			<div id="resume">
+				<div id="portfolio">
+					<div id="blog">
+						<div id="contact">
+
+							<div class="header-mobile">
+								<a class="header-toggle"><i class="fas fa-bars"></i></a>
+								<h2>باها</h2>
+							</div>
+
+							<!-- Left Block -->
+							{% include 'partials/_header_nav.html' %}
+
+
+                            {% block page_content %}
+                                {% include 'partials/_home_banner.html' %}
+                                {% include 'partials/_about_page.html' %}
+                                {% include 'partials/_resume_page.html' %}
+                                {% include 'partials/_portfolio_page.html' %}
+                                {% include 'partials/_blog_page.html' %}
+                                {% include 'partials/_contact_page.html' %}
+                            {% endblock page_content %}
+
+
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% include 'shared/_footer_references.html' %}
+
+
+</body>
+
+</html>

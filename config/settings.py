@@ -138,3 +138,24 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # STATIC_ROOT=os.path.join(BASE_DIR, 'static')
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+
+# Email SMTP Settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smmpt.gmail.com'
+# تغییر مهم: حتما باید cast=int باشد
+EMAIL_PORT = 587
+# تغییر مهم: حتما باید cast=bool باشد
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'behrouzyou@gmail.com'
+EMAIL_HOST_PASSWORD ="your app password google"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# این خط را حتما اضافه کنید (ایمیلی که می‌خواهید کپی پیام‌ها به آن بیاید)
+ADMIN_EMAIL = 'behrouzyou@gmail.com'
+
+# contact info
+
+CONTACT_EMAIL = 'behrouzyou@gmail.com'
+CONTACT_PHONE = '(+98) 937 300 7494'
+CONTACT_ADDRESS = 'ورامین کوچه دوم'

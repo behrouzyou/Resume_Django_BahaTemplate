@@ -1,0 +1,160 @@
+{% load core_tags %}
+
+<!-- Contact Section -->
+<div id='contact' class="page pt-contact" data-simplebar>
+    <section class="container">
+
+        <!-- Section Title -->
+        <div class="header-page mt-70 mob-mt">
+            <h2>تماس با ما</h2>
+            <span></span>
+        </div>
+
+        <!-- Form Start -->
+        <div class="row mt-100">
+            <div class="col-lg-12 col-sm-12">
+                <div class="contact-form">
+                    <form method="post" action="{% url 'contact:submit' %}" class="box-1 contact-valid" id="contact-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-12">
+                                <input type="text" name="name" id="name" class="form-control" placeholder="نام *" required>
+                            </div>
+
+                            <div class="col-lg-6 col-sm-12 mt-3 mt-lg-0">
+                                <input type="email" name="email" id="email" class="form-control" placeholder="* ایمیل" dir="ltr" required>
+                            </div>
+
+                            <div class="col-lg-12 col-sm-12">
+                                <textarea class="form-control" name="note" id="note" placeholder="پیام شما" required></textarea>
+                            </div>
+
+                            <div class="col-lg-12 col-sm-12 text-center">
+                                <!-- اصلاح شد: اضافه کردن id="submit-btn" -->
+                                <button type="submit" id="submit-btn" class="btn-st">ارسال پیام</button>
+
+                                <!-- لودر در ابتدا مخفی است -->
+                                <div id="loader" style="display: none;">
+                                    <i class="fas fa-sync fa-spin"></i>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-sm-12">
+                                <div class="error-messages">
+                                    <!-- اصلاح شد: اضافه کردن style="display:none" و تگ span -->
+                                    <div id="success-msg" class="alert alert-success mt-3" style="display: none;">
+                                        <i class="far fa-check-circle"></i>
+                                        <span>متشکریم، پیام شما ارسال شد.</span>
+                                    </div>
+
+                                    <div id="error-msg" class="alert alert-danger mt-3" style="display: none;">
+                                        <i class="far fa-times-circle"></i>
+                                        <span>خطایی در هنگام ارسال ایمیل رخ داد.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        {% get_contact_info as contact_info %}
+        <div class="box-2 contact-info">
+            <div class="row">
+                <div class="col-lg-4 col-sm-12 info">
+                    <i class="fas fa-paper-plane"></i>
+                    <p>{{ contact_info.email }}</p>
+                    <span>ایمیل</span>
+                </div>
+                <div class="col-lg-4 col-sm-12 info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>{{ contact_info.address }}</p>
+                    <span>آدرس</span>
+                </div>
+                <div class="col-lg-4 col-sm-12 info">
+                    <i class="fas fa-phone"></i>
+                    <p><span class="ltr-text">{{ contact_info.phone }}</span></p>
+                    <span>تلفن</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- JavaScript for Form -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contact-form');
+    const loader = document.getElementById('loader');
+    const submitBtn = document.getElementById('submit-btn'); // حالا این کار می‌کند چون ID را اضافه کردیم
+    const successMsg = document.getElementById('success-msg');
+    const errorMsg = document.getElementById('error-msg');
+
+    if(form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // مخفی کردن پیام‌های قبلی
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+
+            // نمایش لودر و غیرفعال کردن دکمه
+            loader.style.display = 'inline-block';
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'در حال ارسال...'; // فیدبک بصری به دکمه
+
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                loader.style.display = 'none';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'ارسال پیام';
+
+                if(data.success) {
+                    successMsg.style.display = 'block';
+                    // حالا span وجود دارد و خطا نمی‌دهد
+                    const successSpan = successMsg.querySelector('span');
+                    if(successSpan) successSpan.textContent = data.message;
+
+                    form.reset();
+
+                    // حذف پیام بعد از ۵ ثانیه
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                    }, 5000);
+                } else {
+                    errorMsg.style.display = 'block';
+                    const errorSpan = errorMsg.querySelector('span');
+
+                    // اگر ارورها لیست باشند
+                    if (data.errors) {
+                         if(errorSpan) errorSpan.textContent = data.errors.join(' - ');
+                    } else {
+                         if(errorSpan) errorSpan.textContent = data.message || 'خطایی رخ داد';
+                    }
+                }
+            })
+            .catch(error => {
+                loader.style.display = 'none';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'ارسال پیام';
+
+                errorMsg.style.display = 'block';
+                const errorSpan = errorMsg.querySelector('span');
+                if(errorSpan) errorSpan.textContent = 'خطا در ارتباط با سرور';
+                console.error('Error:', error);
+            });
+        });
+    }
+});
+</script>

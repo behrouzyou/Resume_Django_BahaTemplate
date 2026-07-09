@@ -3,6 +3,11 @@ from core.models import GeneralSetting
 from services.models import ExperienceBox,Service,Interest,Testimonial,PricingPlan
 from resume.models import ResumeEntry, Skill, WorkProcess
 from projects.models import ProjectCategory,Project
+from django.contrib import messages
+from django.conf import settings
+from contact.forms import ContactForm
+
+
 
 register=template.Library()
 @register.inclusion_tag('partials/_header_nav.html')
@@ -95,4 +100,26 @@ def project_list():
         "categories": categories,
         'projects':projects,
 
+    }
+
+#   CONTACT TAG
+@register.inclusion_tag('tags/contact_form.html',takes_context=True)
+def contact_section(context):
+    request = context['request']
+    form = ContactForm()
+
+    message_list = messages.get_messages(request)
+
+    return {
+        'form': form,
+        'request': request,
+        'messages': message_list,
+    }
+
+@register.simple_tag
+def get_contact_info():
+    return {
+        'email':getattr(settings, 'CONTACT_EMAIL', 'behrouzyou@gmail.com'),
+        'phone':getattr(settings,'CONTACT_PHONE','(+98) 9373007494'),
+        'address':getattr(settings,'CONTACT_ADDRESS','ورامین کوچه دوم')
     }

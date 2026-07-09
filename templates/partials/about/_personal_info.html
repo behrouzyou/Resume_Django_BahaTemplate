@@ -1,0 +1,37 @@
+{% load core_tags %}
+<!-- Personal Info Start -->
+<div class="row mt-100">
+  <!-- Information Block -->
+  <div class="col-lg-12 col-sm-12">
+    <div class="info box-1">
+      <div class="row">
+        <div class="col-lg-3 col-sm-4">
+          <div class="photo">
+            <img alt="" src="{{setting.profile_image.url}}" />
+          </div>
+        </div>
+        <div class="col-lg-9 col-sm-8">
+          <h4>{{setting.name}}</h4>
+          <div class="loc">
+            <i class="fas fa-map-marked-alt"></i> {{setting.location}}
+          </div>
+          <p>
+            {{setting.bio|linebreaks}}
+          </p>
+
+        </div>
+
+
+        <div class="col-lg-3 col-sm-12 pt-50">
+
+         {% if setting.resume_file %}
+          <a href="{{setting.resume_file.url}}" class="btn-st">دریافت رزومه</a>
+
+         {% endif %}
+
+        </div>
+        {% experience_boxes %}
+      </div>
+    </div>
+  </div>
+</div>

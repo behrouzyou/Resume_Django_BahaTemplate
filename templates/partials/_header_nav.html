@@ -2,32 +2,41 @@
 
 								<!-- Logo -->
 								<div class="logo">
-									<img src="/static/site/img/logo.png" alt="">
+
+                                    {% if setting.logo %}
+                                        <img src="{{ setting.logo.url }}" alt="{{ setting.logo.url }}"
+                                        style="border-radius: 50%; width:100px;height:100px">
+                                        {% else %}
+                                        <img src="/static/site/img/logo.png" alt="">
+                                    {% endif %}
+
 								</div>
 
 								<ul>
 									<li data-tooltip="خانه" data-position="top">
-										<a href="index-ripples.html#home" class="icon-h fas fa-house-damage"></a>
+										<a href="#home" class="icon-h fas fa-house-damage"></a>
 									</li>
 									<li data-tooltip="درباره" data-position="top">
-										<a href="index-ripples.html#about" class="icon-a fas fa-user-tie"></a>
+										<a href="#about" class="icon-a fas fa-user-tie"></a>
 									</li>
 									<li data-tooltip="رزومه" data-position="top">
-										<a href="index-ripples.html#resume" class="icon-r fas fa-address-book"></a>
+										<a href="#resume" class="icon-r fas fa-address-book"></a>
 									</li>
 									<li data-tooltip="نمونه‌کارها" data-position="top">
-										<a href="index-ripples.html#portfolio" class="icon-p fas fa-briefcase"></a>
+										<a href="#portfolio" class="icon-p fas fa-briefcase"></a>
 									</li>
 									<li data-tooltip="بلاگ" data-position="top">
-										<a href="index-ripples.html#blog" class="icon-b fas fa-receipt"></a>
+										<a href="#blog" class="icon-b fas fa-receipt"></a>
 									</li>
 									<li data-tooltip="تماس" data-position="bottom">
-										<a href="index-ripples.html#contact" class="icon-c fas fa-envelope"></a>
+										<a href="#contact" class="icon-c fas fa-envelope"></a>
 									</li>
 								</ul>
 
 								<!-- Sound wave -->
-								<a class="music-bg">
+
+                                {% if setting.enable_sound %}
+                                    <a class="music-bg">
 									<div class="lines">
 										<span></span>
 										<span></span>
@@ -38,4 +47,6 @@
 									</div>
 									<p> صدا </p>
 								</a>
+                                {% endif %}
+
 							</nav>

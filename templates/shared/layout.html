@@ -1,3 +1,5 @@
+{% load core_tags %}
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
@@ -44,8 +46,8 @@
 							</div>
 
 							<!-- Left Block -->
-							{% include 'partials/_header_nav.html' %}
-
+							{% comment %} {% include 'partials/_header_nav.html' %} {% endcomment %}
+                            {% site_header  %}
 
                             {% block page_content %}
                                 {% include 'partials/_home_banner.html' %}

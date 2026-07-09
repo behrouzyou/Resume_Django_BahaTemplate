@@ -8,39 +8,17 @@
 											</div>
 										</div>
 
-										<!-- Service Item -->
-										<div class="col-lg-6 col-sm-6">
+                                        {% for service in services  %}
+                                        				<!-- Service Item -->
+                                            <div class="col-lg-6 col-sm-6 ">
 											<div class="service box-1 mb-40">
-												<i class="fas fa-desktop"></i>
-												<h4>طراحی وب</h4>
-												<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها</p>
-											</div>
-										</div>
+												<i class="{{service.icon_class}}"></i>
+												<h4> {{service.title}}</h4>
+												<p>{{ service.description }}</p>
+                                                </div></div>
 
-										<!-- Service Item -->
-										<div class="col-lg-6 col-sm-6">
-											<div class="service box-2 mb-40">
-												<i class="fas fa-cogs"></i>
-												<h4>توسعه وب</h4>
-												<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها</p>
-											</div>
-										</div>
+                                        {% endfor %}
 
-										<!-- Service Item -->
-										<div class="col-lg-6 col-sm-6">
-											<div class="service box-2 mb-40">
-												<i class="fas fa-mobile-alt"></i>
-												<h4>طراحی واکنشگرا</h4>
-												<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها</p>
-											</div>
-										</div>
 
-										<!-- Service Item -->
-										<div class="col-lg-6 col-sm-6">
-											<div class="service box-1 mb-40">
-												<i class="fas fa-medkit"></i>
-												<h4>پشتیبانی سریع</h4>
-												<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها</p>
-											</div>
-										</div>
+
 									</div>

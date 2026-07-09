@@ -1,0 +1,50 @@
+<!-- Skills Row Start -->
+<div class="row mt-100">
+
+    <!-- Header Block -->
+    <div class="col-md-12">
+        <div class="header-box mb-50">
+            <h3>مهارت ها</h3>
+        </div>
+    </div>
+</div>
+
+<div class="box-1 skills">
+    <div class="row">
+        <div class="col-md-6">
+            {% for skill in skills %}
+                {% if skill.display_type == 'progress' %}
+                    <!-- Skill Item -->
+                    <div class="skill-item">
+                        <h4 class="progress-title">{{ skill.name }}</h4>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:{{ skill.percentage }}%">
+                                <div class="progress-value">{{ skill.percentage }}%</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="row">
+                {% for skill in skills %}
+                    {% if skill.display_type == 'chart' %}
+
+                        <!-- Skill Item -->
+                        <div class="col-lg-6 col-sm-6 skill-chart">
+                            <div class="chart" data-percent="{{ skill.percentage }}"
+                                 data-bar-color="#fff"> {{ skill.percentage }}% <p>{{ skill.name }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+</div>

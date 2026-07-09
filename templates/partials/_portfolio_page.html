@@ -1,136 +1,46 @@
+{% load core_tags %}
+<!-- Portfolio Section -->
+<div class="page pt-portfolio" data-simplebar>
+    <section class="container">
 
-							<!-- Portfolio Section -->
-							<div class="page pt-portfolio" data-simplebar>
-								<section class="container">
+        <!-- Section Title -->
+        <div class="header-page mt-70 mob-mt">
+            <h2>نمونه‌کارها</h2>
+            <span></span>
+        </div>
 
-									<!-- Section Title -->
-									<div class="header-page mt-70 mob-mt">
-										<h2>نمونه‌کارها</h2>
-										<span></span>
-									</div>
+        <!-- Portfolio Filter Row Start -->
+        <div class="row mt-100">
+            <div class="col-lg-12 col-sm-12 portfolio-filter">
+                <ul>
+                    <li class="active" data-filter="*">همه</li>
+                    {% for category in categories %}
+                        <li data-filter=".{{ category.slug }}">{{ category.name }}</li>
 
-									<!-- Portfolio Filter Row Start -->
-									<div class="row mt-100">
-										<div class="col-lg-12 col-sm-12 portfolio-filter">
-											<ul>
-												<li class="active" data-filter="*">همه</li>
-												<li data-filter=".brand">برند</li>
-												<li data-filter=".design">طراحی</li>
-												<li data-filter=".graphic">گرافیک</li>
-											</ul>
-										</div>
-									</div>
+                    {% endfor %}
 
-									<!-- Portfolio Item Row Start -->
-									<div class="row portfolio-items mt-100 mb-100">
+                </ul>
+            </div>
+        </div>
 
-										<!-- Portfolio Item -->
-										<div class="item col-lg-4 col-sm-6 graphic">
-											<figure>
-												<img alt="" src="/static/site/img/portfolio/img-1.jpg">
-												<figcaption>
-													<h3>نام پروژه</h3>
-													<p>گرافیک</p><i class="fas fa-image"></i>
-													<a class="image-link" href="/static/site/img/portfolio/img-1.jpg"></a>
-												</figcaption>
-											</figure>
-										</div>
+        <!-- Portfolio Item Row Start -->
+        <div class="row portfolio-items mt-100 mb-100">
 
-										<!-- Portfolio Item -->
-										<div class="item col-lg-4 col-sm-6 design">
-											<figure>
-												<img alt="" src="/static/site/img/portfolio/img-2.jpg">
-												<figcaption>
-													<h3>نام پروژه</h3>
-													<p>طراحی</p><i class="fas fa-image"></i>
-													<a class="image-link" href="/static/site/img/portfolio/img-2.jpg"></a>
-												</figcaption>
-											</figure>
-										</div>
+            {% for project in projects %}
+                <!-- Portfolio Item -->
+                <div class="item col-lg-4 col-sm-6 {{ project.category.slug }}">
+                    <figure>
+                        <img alt="{{ project.title }}" src="{{ project.image.url }}">
+                        <figcaption>
+                            <h3>{{ project.title }}</h3>
+                            <p>{{ project.category.name }}</p><i class="fas fa-image"></i>
+                            <a class="image-link" href="{{ project.image.url }}"></a>
+                        </figcaption>
+                    </figure>
+                </div>
+            {% endfor %}
 
-										<!-- Portfolio Item -->
-										<div class="item col-lg-4 col-sm-6 brand">
-											<figure>
-												<img alt="" src="/static/site/img/portfolio/img-3.jpg">
-												<figcaption>
-													<h3>نام پروژه</h3>
-													<p>گرافیک</p><i class="fas fa-video"></i>
-													<a class="video-link" href="video/video-iframe.html"></a>
-												</figcaption>
-											</figure>
-										</div>
 
-										<!-- Portfolio Item -->
-										<div class="item col-lg-4 col-sm-6 graphic">
-											<figure>
-												<img alt="" src="/static/site/img/portfolio/img-4.jpg">
-												<figcaption>
-													<h3>نام پروژه</h3>
-													<p>طراحی</p><i class="fas fa-image"></i>
-													<a class="image-link" href="/static/site/img/portfolio/img-4.jpg"></a>
-												</figcaption>
-											</figure>
-										</div>
-
-										<!-- Portfolio Item -->
-										<div class="item col-lg-4 col-sm-6 design">
-											<figure>
-												<img alt="" src="/static/site/img/portfolio/img-5.jpg">
-												<figcaption>
-													<h3>نام پروژه</h3>
-													<p>طراحی</p><i class="fas fa-video"></i>
-													<a class="video-link" href="video/video-iframe.html"></a>
-												</figcaption>
-											</figure>
-										</div>
-
-										<!-- Portfolio Item -->
-										<div class="item col-lg-4 col-sm-6 brand">
-											<figure>
-												<img alt="" src="/static/site/img/portfolio/img-6.jpg">
-												<figcaption>
-													<h3>نام پروژه</h3>
-													<p>برند</p><i class="fas fa-image"></i>
-													<a class="image-link" href="/static/site/img/portfolio/img-6.jpg"></a>
-												</figcaption>
-											</figure>
-										</div>
-
-										<!-- Portfolio Item -->
-										<div class="item col-lg-4 col-sm-6 graphic">
-											<figure>
-												<img alt="" src="/static/site/img/portfolio/img-7.jpg">
-												<figcaption>
-													<h3>نام پروژه</h3>
-													<p>برند</p><i class="fas fa-image"></i>
-													<a class="image-link" href="/static/site/img/portfolio/img-7.jpg"></a>
-												</figcaption>
-											</figure>
-										</div>
-
-										<!-- Portfolio Item -->
-										<div class="item col-lg-4 col-sm-6 design">
-											<figure>
-												<img alt="" src="/static/site/img/portfolio/img-8.jpg">
-												<figcaption>
-													<h3>نام پروژه</h3>
-													<p>برند</p><i class="fas fa-image"></i>
-													<a class="image-link" href="/static/site/img/portfolio/img-8.jpg"></a>
-												</figcaption>
-											</figure>
-										</div>
-
-										<!-- Portfolio Item -->
-										<div class="item col-lg-4 col-sm-6 brand">
-											<figure>
-												<img alt="" src="/static/site/img/portfolio/img-9.jpg">
-												<figcaption>
-													<h3>نام پروژه</h3>
-													<p>گرافیک</p><i class="fas fa-image"></i>
-													<a class="image-link" href="/static/site/img/portfolio/img-9.jpg"></a>
-												</figcaption>
-											</figure>
-										</div>
-									</div>
-								</section>
-							</div>
+        </div>
+    </section>
+</div>

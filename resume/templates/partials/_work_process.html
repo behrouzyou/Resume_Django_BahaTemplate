@@ -1,0 +1,49 @@
+<!-- Work Process Row Start -->
+
+<div class="box-2 work-process mb-100">
+    <div class="row">
+        <div class="col-lg-4 col-sm-12 ltr">
+
+            {% for p in process_list %}
+                {% if p.step|divisibleby:2 == False %}
+                    <!-- Working Process Item-->
+                    <div class="single-wp width-sm process-{{ p.step }}">
+                        <p class="wp-step">{{ p.step|add:'0'|slice:'-2' }}</p>
+                        <h4 class="wp-title">{{ p.title }}</h4>
+                        <p>{{ p.description }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+
+        </div>
+
+        <div class="col-lg-4 hidden-sm">
+
+            <!-- Working Process Circle-->
+            <div class="wp-circle">
+                <h4>پروسه کاری</h4>
+                <span class="dots top-l"></span>
+                <span class="dots bottom-l"></span>
+                <span class="dots top-r"></span>
+                <span class="dots bottom-r"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-sm-12 rtl">
+
+            {% for p in process_list %}
+                {% if p.step|divisibleby:2 %}
+                    <!-- Working Process Item-->
+                    <div class="single-wp width-sm process-{{ p.step }}">
+                        <p class="wp-step">{{ p.step|add:'0'|slice:'-2' }}</p>
+                        <h4 class="wp-title">{{ p.title }}</h4>
+                        <p>{{ p.description }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+
+        </div>
+    </div>
+</div>

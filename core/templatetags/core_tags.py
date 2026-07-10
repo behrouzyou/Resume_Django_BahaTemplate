@@ -17,6 +17,21 @@ def site_header():
     return{
         'setting':setting
     }
+@register.inclusion_tag('partials/_home_banner.html')
+def render_home_hero():
+    setting = GeneralSetting.objects.first()
+    return {'setting': setting}
+
+
+
+
+@register.filter
+def split_jobs(value):
+    if value:
+        # جدا کردن با کاما انگلیسی یا فارسی
+        return [x.strip() for x in value.replace('،', ',').split(',')]
+    return []
+
 
 #     SERVICES TAG
 @register.inclusion_tag('partials/about/_personal_info.html')

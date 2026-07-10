@@ -1,36 +1,51 @@
-							<!-- Home Section -->
-							<div class="pt-home" style="background-image: url('/static/site/img/home-bg.jpg')">
-								<section>
+{% load static core_tags %}
 
-									<!-- Banner -->
-									<div class="banner">
-										<h1>جان اسنو</h1>
-										<p class="cd-headline rotate-1">
-											<span class="cd-words-wrapper">
-												<b class="is-visible">توسعه دهنده</b>
-												<b>عکاس حرفه ای</b>
-												<b>طراح</b>
-												<b>فریلنسر</b>
-											</span>
-										</p>
-									</div>
 
-									<!-- Language -->
-									<div class="lang">
-										<ul>
-											<li><a href="index-ripples.html#" class="active">فارسی</a></li>
-											<li><a href="index-ripples.html#">انگلیسی</a></li>
-										</ul>
-									</div>
+<div class="pt-home" style="background-image: url('{% if setting and setting.home_bg_image %}{{ setting.home_bg_image.url }}{% else %}{% static 'site/img/home-bg.jpg' %}{% endif %}')">
+    <section>
 
-									<!-- Social -->
-									<div class="social">
-										<ul>
-											<li><a href="index-ripples.html#"><i class="fab fa-facebook-f"></i></a></li>
-											<li><a href="index-ripples.html#"><i class="fab fa-twitter"></i></a></li>
-											<li><a href="index-ripples.html#"><i class="fab fa-instagram"></i></a></li>
-											<li><a href="index-ripples.html#"><i class="fab fa-youtube"></i></a></li>
-										</ul>
-									</div>
-								</section>
-							</div>
+        <!-- Banner -->
+        <div class="banner">
+
+            <h1>{{ setting.name|default:"نام شما" }}</h1>
+            
+            <p class="cd-headline rotate-1">
+                <span class="cd-words-wrapper">
+                    {% if setting.title %}
+
+                        {% for job in setting.title|split_jobs %}
+
+                            <b class="{% if forloop.first %}is-visible{% endif %}">{{ job }}</b>
+                        {% endfor %}
+                    {% else %}
+                        <b class="is-visible">خوش آمدید</b>
+                    {% endif %}
+                </span>
+            </p>
+        </div>
+
+        <!-- Language -->
+        <div class="lang">
+            <ul>
+                <li><a href="#" class="active">فارسی</a></li>
+            </ul>
+        </div>
+
+
+        <div class="social">
+            <ul>
+                {% if setting %}
+
+                    {% for link in setting.social_links.all %}
+                    <li>
+                        <a href="{{ link.url }}" target="_blank">
+                            <i class="{{ link.icon_class }}"></i>
+                        </a>
+                    </li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+        
+    </section>
+</div>

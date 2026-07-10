@@ -1,76 +1,78 @@
 {% load core_tags %}
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
 
-	<!-- Meta -->
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-	<!-- Title -->
-	<title>قالب Baha - قالب شخصی باها</title>
+    <!-- Title -->
+    <title>سایت شخصی</title>
 
-	{% include 'shared/_head_references.html' %}
-	<meta name="theme-color" content="#0e0f10">
+    {% include 'shared/_head_references.html' %}
+    <meta name="theme-color" content="#0e0f10">
+    {% block extra_head %}{% endblock %}
 
 </head>
 
 <body>
 
-	<!--Theme Options Start-->
-	{% include 'partials/_theme_option.html' %}
+{% include 'partials/_theme_option.html' %}
 
-	<!-- Preloader -->
-	<div id="preloader">
-		<div class="loading-area">
-			<div class="circle"></div>
-		</div>
-		<div class="left-side"></div>
-		<div class="right-side"></div>
-	</div>
+<!-- Preloader -->
+<div id="preloader">
+    <div class="loading-area">
+        <div class="circle"></div>
+    </div>
+    <div class="left-side"></div>
+    <div class="right-side"></div>
+</div>
 
-	<!-- Main Site -->
-	<div id="home">
-		<div id="about">
-			<div id="resume">
-				<div id="portfolio">
-					<div id="blog">
-						<div id="contact">
-
-							<div class="header-mobile">
-								<a class="header-toggle"><i class="fas fa-bars"></i></a>
-								<h2>Behrouz</h2>
-							</div>
-
-							<!-- Left Block -->
-							{% comment %} {% include 'partials/_header_nav.html' %} {% endcomment %}
-                            {% site_header  %}
-
-                            {% block page_content %}
-                                {% include 'partials/_home_banner.html' %}
-                                {% include 'partials/_about_page.html' %}
-                                {% include 'partials/_resume_page.html' %}
-                                    {% project_list %}
-                                {% latest_blog_posts %}
-                                {% contact_section %}
-                            {% endblock page_content %}
+{% block main_body %}
 
 
+    <!-- Main Site -->
+<div id="home">
+    <div id="about">
+        <div id="resume">
+            <div id="portfolio">
+                <div id="blog">
+                    <div id="contact">
+
+                        <div class="header-mobile">
+                            <a class="header-toggle"><i class="fas fa-bars"></i></a>
+                            <h2>رضا</h2>
+                        </div>
+
+
+{#                                                    {% include 'partials/_header_nav.html' %}#}
+                        {% site_header %}
+                        {% block page_content %}
+                            {% render_home_hero %}
+                            {% include 'partials/_about_page.html' %}
+                            {% include 'partials/_resume_page.html' %}
+                            {% project_list %}
+                            {% latest_blog_posts %}
+                            {% contact_section %}
+                        {% endblock %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+{% endblock %}
 
-	{% include 'shared/_footer_references.html' %}
-
+{% include 'shared/_footer_references.html' %}
+{% block extra_scripts %}{% endblock %}
 
 </body>
 

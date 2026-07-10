@@ -1,129 +1,50 @@
+{% load jalali_tags %}
+{% load static %}
+<div class="page pt-blog" data-simplebar>
+    <section class="container">
 
-							<!-- Blog Section -->
-							<div class="page pt-blog" data-simplebar>
-								<section class="container">
+        <div class="header-page mt-70 mob-mt">
+            <h2>بلاگ</h2>
+            <span></span>
+        </div>
 
-									<!-- Section Title -->
-									<div class="header-page mt-70 mob-mt">
-										<h2>بلاگ</h2>
-										<span></span>
-									</div>
+        <div class="row blog-masonry mt-100 mb-50">
+            {% for post in posts %}
+            <div class="col-lg-4 col-sm-6">
+                <div class="blog-item">
+                    <div class="thumbnail">
+                        <!-- استفاده از onclick برای فورس کردن ریدایرکت -->
+                        <a href="javascript:void(0);" onclick="window.location.href='{{ post.get_absolute_url }}'">
+                            {% if post.image %}
+                                <img alt="{{ post.title }}" src="{{ post.image.url }}">
+                            {% endif %}
+                        </a>
+                    </div>
+                    <h4>
+                        <a href="javascript:void(0);" onclick="window.location.href='{{ post.get_absolute_url }}'">
+                            {{ post.title }}
+                        </a>
+                    </h4>
+                    <ul>
+                        <li><a href="#">{{ post.created_at|to_jalali:'%d %B %Y' }}</a></li>
+                        {% if post.category %}
+                        <li><a href="#">{{ post.category.name }}</a></li>
+                        {% endif %}
+                    </ul>
+                    <div class="blog-btn">
+                        <!-- دکمه اصلی -->
+                        <a href="javascript:void(0);" onclick="window.location.href='{{ post.get_absolute_url }}'" class="btn-st">بیشتر بخوانید</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
 
-									<!-- Blog Row Start -->
-									<div class="row blog-masonry mt-100 mb-50">
+        <div class="row mt-60 mb-90">
+            <div class="col-lg-12 col-sm-12 text-center">
+                <a href="{% url 'blog:post_list' %}" class="btn-st">مشاهده همه مطالب بلاگ</a>
+            </div>
+        </div>
 
-										<!-- Blog Item -->
-										<div class="col-lg-4 col-sm-6">
-											<div class="blog-item">
-												<div class="thumbnail">
-													<a href="blog-single.html"><img alt="" src="/static/site/img/blog/img-1.jpg"></a>
-												</div>
-												<h4><a href="blog-single.html">راه موفقیت</a></h4>
-												<ul>
-													<li><a href="index-ripples.html#">15 اسفند 1398</a></li>
-													<li><a href="index-ripples.html#">سبک زندگی</a></li>
-												</ul>
-												<div class="blog-btn">
-													<a href="blog-single.html" class="btn-st">بیشتر بخوانید</a>
-												</div>
-											</div>
-										</div>
-
-										<!-- Blog Item -->
-										<div class="col-lg-4 col-sm-6">
-											<div class="blog-item">
-												<div class="thumbnail">
-													<a href="blog-single.html"><img alt="" src="/static/site/img/blog/img-2.jpg"></a>
-													<a href="video/video-iframe.html" class="btn-play"></a>
-												</div>
-												<h4><a href="blog-single.html">راه موفقیت</a></h4>
-												<ul>
-													<li><a href="index-ripples.html#">10 اسفند 1398</a></li>
-													<li><a href="index-ripples.html#">سبک زندگی</a></li>
-												</ul>
-												<div class="blog-btn">
-													<a href="blog-single.html" class="btn-st">بیشتر بخوانید</a>
-												</div>
-											</div>
-										</div>
-
-										<!-- Blog Item -->
-										<div class="col-lg-4 col-sm-6">
-											<div class="blog-item">
-												<div class="thumbnail">
-													<a href="blog-single.html"><img alt="" src="/static/site/img/blog/img-3.jpg"></a>
-												</div>
-												<h4><a href="blog-single.html">راه موفقیت</a></h4>
-												<ul>
-													<li><a href="index-ripples.html#">2 اسفند 1398</a></li>
-													<li><a href="index-ripples.html#">کار</a></li>
-												</ul>
-												<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه</p>
-												<div class="blog-btn">
-													<a href="blog-single.html" class="btn-st">بیشتر بخوانید</a>
-												</div>
-											</div>
-										</div>
-
-										<!-- Blog Item -->
-										<div class="col-lg-4 col-sm-6">
-											<div class="blog-item">
-												<div class="thumbnail">
-													<a href="blog-single.html"><img alt="" src="/static/site/img/blog/img-4.jpg"></a>
-												</div>
-												<h4><a href="blog-single.html">راه موفقیت</a></h4>
-												<ul>
-													<li><a href="index-ripples.html#">29 بهمن 1398</a></li>
-													<li><a href="index-ripples.html#">حرفه</a></li>
-												</ul>
-												<div class="blog-btn">
-													<a href="blog-single.html" class="btn-st">بیشتر بخوانید</a>
-												</div>
-											</div>
-										</div>
-
-										<!-- Blog Item -->
-										<div class="col-lg-4 col-sm-6">
-											<div class="blog-item">
-												<div class="thumbnail">
-													<a href="blog-single.html"><img alt="" src="/static/site/img/blog/img-5.jpg"></a>
-												</div>
-												<h4><a href="blog-single.html">راه موفقیت</a></h4>
-												<ul>
-													<li><a href="index-ripples.html#">14 بهمن 1398</a></li>
-													<li><a href="index-ripples.html#">سبک زندگی</a></li>
-												</ul>
-												<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه</p>
-												<div class="blog-btn">
-													<a href="blog-single.html" class="btn-st">بیشتر بخوانید</a>
-												</div>
-											</div>
-										</div>
-
-										<!-- Blog Item -->
-										<div class="col-lg-4 col-sm-6">
-											<div class="blog-item">
-												<div class="thumbnail">
-													<a href="blog-single.html"><img alt="" src="/static/site/img/blog/img-6.jpg"></a>
-													<a href="video/video-iframe.html" class="btn-play"></a>
-												</div>
-												<h4><a href="blog-single.html">راه موفقیت</a></h4>
-												<ul>
-													<li><a href="index-ripples.html#">29 دی 1398</a></li>
-													<li><a href="index-ripples.html#">حرفه</a></li>
-												</ul>
-												<div class="blog-btn">
-													<a href="blog-single.html" class="btn-st">بیشتر بخوانید</a>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="row mt-60 mb-90">
-										<div class="col-lg-12 col-sm-12 text-center">
-											<a href="blog-list.html" class="btn-st">مشاهده همه مطالب بلاگ</a>
-										</div>
-									</div>
-
-								</section>
-							</div>
+    </section>
+</div>

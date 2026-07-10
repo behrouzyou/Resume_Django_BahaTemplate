@@ -6,6 +6,7 @@ from projects.models import ProjectCategory,Project
 from django.contrib import messages
 from django.conf import settings
 from contact.forms import ContactForm
+from blog.models import Post
 
 
 
@@ -123,3 +124,9 @@ def get_contact_info():
         'phone':getattr(settings,'CONTACT_PHONE','(+98) 9373007494'),
         'address':getattr(settings,'CONTACT_ADDRESS','ورامین کوچه دوم')
     }
+
+#              BLOG TAG
+@register.inclusion_tag('partials/_blog_page.html')
+def latest_blog_posts(count=5):
+    posts = Post.objects.filter(is_active=True).order_by('created_at')[:count]
+    return {'posts': posts}

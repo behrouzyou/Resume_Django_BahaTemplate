@@ -1,0 +1,77 @@
+{% extends 'blog/blog_base.html' %}
+{% load jalali_tags %}
+{% load static %}
+
+{% block blog_content %}
+<div class="blog-page" data-simplebar>
+    <nav class="blog-nav">
+        <!-- دکمه بازگشت به لیست بلاگ -->
+        <a href="{% url 'blog:post_list' %}">
+            <i class="fas fa-bars"></i>
+        </a>
+    </nav>
+
+    <div class="blog-image">
+        {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.title }}"
+        style="width: 100%; height: 450px; margin-top: 30px;border-radius: 20px;"
+        >
+        {% endif %}
+    </div>
+
+    <div class="row blog-container">
+        <div class="col-md-10 offset-md-1">
+
+            <div class="blog-heading pt-70 pb-100">
+                <h2>{{ post.title }}</h2>
+                <span><i class="fas fa-calendar-alt"></i>{{ post.created_at|to_jalali:'%d %B %Y'}}</span>
+                {% if post.category %}
+                <span><i class="fas fa-folder"></i>{{ post.category.name }}</span>
+                {% endif %}
+            </div>
+
+            <div class="blog-content">
+                {{ post.content|safe }}
+            </div>
+
+            <!-- برچسب ها -->
+            {% if post.tags.all %}
+            <div class="tags mt-4">
+                 <span>برچسب‌ها: </span>
+                 {% for tag in post.tags.all %}
+                 <a href="{% url 'blog:post_list' %}?tag={{ tag.slug }}" style="background: #333; padding: 5px 10px; border-radius: 5px; color: #fff;">#{{ tag.name }}</a>
+                 {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- بخش نظرات (کد قبلی را اینجا قرار دهید یا ساده شده زیر را استفاده کنید) -->
+            <div class="blog-comments mt-100 mb-100">
+                <div class="header-box mb-50">
+                    <h3>دیدگاه‌ها ({{ comments.count }})</h3>
+                </div>
+                <ul>
+                    {% for comment in comments %}
+                    <li>
+                        <div class="comment-text">
+                            <h4>{{ comment.name }}</h4>
+                            <p>{{ comment.message }}</p>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- فرم ارسال نظر -->
+            <div class="contact-form mb-100">
+                <h3>ارسال نظر</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn-st">ارسال</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

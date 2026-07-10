@@ -1,0 +1,46 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+
+{% block main_body %}
+
+    <!-- Mobile Header -->
+    <div class="header-mobile">
+        <a class="header-toggle"><i class="fas fa-bars"></i></a>
+        <h2>بلاگ</h2>
+    </div>
+
+    <!-- Sidebar Navigation (مخصوص صفحات داخلی بلاگ) -->
+    <nav class="header-main" data-simplebar>
+        <!-- Logo -->
+        <div class="logo">
+            <img src="{% static 'site/img/logo.png' %}" alt="">
+        </div>
+
+        <ul>
+            <!-- نکته مهم: اسلش قبل از # برای بازگشت به صفحه اصلی -->
+            <li data-tooltip="خانه" data-position="top">
+                <a href="/#home" class="fas fa-house-damage"></a>
+            </li>
+            <li data-tooltip="درباره من" data-position="top">
+                <a href="/#about" class="fas fa-user-tie"></a>
+            </li>
+            <li data-tooltip="رزومه" data-position="top">
+                <a href="/#resume" class="fas fa-id-badge"></a>
+            </li>
+             <li data-tooltip="نمونه کار" data-position="top">
+                <a href="/#portfolio" class="fas fa-briefcase"></a>
+            </li>
+            <!-- لینک فعال برای بلاگ -->
+            <li data-tooltip="بلاگ" data-position="top">
+                <a href="{% url 'blog:post_list' %}" class="fas fa-receipt active"></a>
+            </li>
+            <li data-tooltip="تماس" data-position="top">
+                <a href="/#contact" class="fas fa-envelope"></a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Content Injection Point -->
+    {% block blog_content %}{% endblock %}
+
+{% endblock %}

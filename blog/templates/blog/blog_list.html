@@ -1,0 +1,84 @@
+{% extends 'blog/blog_base.html' %}
+{% load jalali_tags %}
+{% load static %}
+
+{% block blog_content %}
+<div class="blog-list" data-simplebar>
+    <div class="blog-head">
+        <h2>بلاگ</h2>
+        <ul class="blog-breadcrumb">
+            <li><a href="/">خانه</a></li>
+            <li>بلاگ</li>
+        </ul>
+    </div>
+    <div class="row blog-list-container">
+        <div class="col-md-10 offset-md-1">
+            <div class="row">
+
+                <!-- لیست پست‌ها -->
+                <div class="col-md-8">
+                    {% for post in posts %}
+                    <div class="blog-post">
+                        <div class="content">
+                            <div class="thumbnail">
+                                <a href="{{ post.get_absolute_url }}">
+                                    {% if post.image %}
+                                    <img src="{{ post.image.url }}" alt="">
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <div class="detalis">
+                                <ul class="meta">
+                                    <li><i class="fa fa-calendar"></i>{{ post.created_at|to_jalali:'%d %B %Y' }}</li>
+                                    <li><i class="icon fa fa-user"></i>{{ post.author.username }}</li>
+                                </ul>
+                                <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+                                <div class="text">{{ post.content|striptags|truncatewords:30 }}</div>
+                                <a href="{{ post.get_absolute_url }}" class="btn-st">مشاهده بیشتر</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                        <p>هیچ پستی یافت نشد.</p>
+                    {% endfor %}
+
+                    <!-- Pagination -->
+                    {% if is_paginated %}
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                        <li><a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-right"></i></a></li>
+                        {% endif %}
+                        <li class="active"><a href="#">{{ page_obj.number }}</a></li>
+                        {% if page_obj.has_next %}
+                        <li><a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-left"></i></a></li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <!-- سایدبار -->
+                <div class="col-md-4">
+                    <div class="side-left">
+                        <form class="search" action="{% url 'blog:post_list' %}">
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="fas fa-search"></i></div>
+                                {{ search_form.q }}
+                            </div>
+                        </form>
+
+                        <div class="categories">
+                            <h4>دسته‌بندی ها</h4>
+                            <ul>
+                                {% for cat in categories %}
+                                <li><a href="{% url 'blog:post_list' %}?category={{ cat.slug }}">{{ cat.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

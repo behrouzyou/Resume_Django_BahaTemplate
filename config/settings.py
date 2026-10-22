@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 from pathlib import Path
 
-import os.path
 
 from django.conf.global_settings import STATICFILES_DIRS
 

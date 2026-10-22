@@ -1,6 +1,6 @@
 # Django Resume and Portfolio Website
 
-A Django portfolio/resume website organized into apps for resume entries, skills, work process, projects, services, blog content, and contact functionality. The project uses Django templates and an AdminLTE-based Django admin theme.
+A Django portfolio/resume website organized into apps for resume entries, skills, work process, projects, services, blog content, and contact functionality. It uses Django templates and an AdminLTE-based admin theme.
 
 ## Features visible in the code
 - Resume experience and education entries
@@ -10,27 +10,21 @@ A Django portfolio/resume website organized into apps for resume entries, skills
 - Django admin customization
 - Jalali date support
 
-## Tech stack
+## Stack
 - Python and Django
 - Django templates
 - AdminLTE 4 integration
-- django-jalali-date
+- Jalali date utilities
 
 ## Run locally
-Requires Python and pip.
-
-```bash
-git clone https://github.com/behrouzyou/Resume_Django_BahaTemplate.git
-cd Resume_Django_BahaTemplate
-python -m venv .venv
-```
-
-Activate the environment and install the project's dependencies. Configure a local Django secret key and allowed hosts, then run:
+Create and activate a Python virtual environment, install project dependencies, and configure a private development secret key. Then run:
 
 ```bash
 python manage.py migrate
 python manage.py runserver
 ```
 
+The repository currently does not expose a root requirements file in its top-level listing, so dependency installation should be based on the packages used by the project or a pinned requirements file should be added.
+
 ## Security
-The current settings are development-oriented. Set a private secret key through an environment variable and configure `DEBUG` and `ALLOWED_HOSTS` appropriately before deployment.
+The settings are development-oriented. Set a private secret key through an environment variable and configure `DEBUG` and `ALLOWED_HOSTS` before deployment.
